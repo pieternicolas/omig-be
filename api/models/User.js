@@ -50,19 +50,25 @@ module.exports = {
     // if(!values.password || !values.confirmation || values.password != values.confirmation) {
     //   return cb({err: ["Password does not match confirmation"]});
     // }
-      // Hash password
-      bcrypt.hash(values.password, 5, (err, hash) => {
-        if (err) return cb(err);
-        values.encryptedPassword = hash;
+    // Hash password
+    bcrypt.hash(values.password, 5, (err, hash) => {
+      if (err) return cb(err);
+      values.encryptedPassword = hash;
 
-        //Delete the passwords so that they are not stored in the DB
-        delete values.password;
-        delete values.confirmation;
+      //Delete the passwords so that they are not stored in the DB
+      delete values.password;
+      delete values.confirmation;
 
-        //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
-        cb();
-      });
-    }
+      //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
+      cb();
+    });
+  },
+
+  afterCreate: (values, cb) => {
+    // Delete any resemblance of personal identity
+    delete values.encryptedPassword;
+    cb();
+  }
 
 };
 

@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt-nodejs';
 /**
  * User.js
  *
@@ -47,20 +47,23 @@ module.exports = {
   },
 
   beforeCreate: (values, cb) => {
-    // if(!values.password || !values.confirmation || values.password != values.confirmation) {
-    //   return cb({err: ["Password does not match confirmation"]});
-    // }
     // Hash password
-    bcrypt.hash(values.password, 5, (err, hash) => {
-      if (err) return cb(err);
-      values.encryptedPassword = hash;
+    // Generate the salt with 5 rounds
+    bcrypt.genSalt(5, (saltErr, salt) => {
+      if (saltErr) return cb(err);
 
-      //Delete the passwords so that they are not stored in the DB
-      delete values.password;
-      delete values.confirmation;
+      // Hash the password after salt creation
+      bcrypt.hash(values.password, salt, null, (err, hash) => {
+        if (err) return cb(err);
+        values.encryptedPassword = hash;
 
-      //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
-      cb();
+        //Delete the passwords so that they are not stored in the DB
+        delete values.password;
+        delete values.confirmation;
+
+        //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
+        cb();
+      });
     });
   },
 

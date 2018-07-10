@@ -50,8 +50,7 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     // Get the user ID from the cookie
-    const req = this.req;
-    const userID = await sails.helpers.getUserId(req.user);
+    const userID = await sails.helpers.getUserId(this.req.user);
 
     // Check if the username has already been used
     const conflictingUser = await User.findOne({ username: inputs.username });

@@ -17,7 +17,8 @@ passport.serializeUser((user, cb) => {
 
 passport.deserializeUser((id, cb) => {
   User.findOne({ id }, (err, user) => {
-    cb(err, user);
+    const userDetails = _.pick(user, ['id', 'username', 'fullName', 'createdAt', 'updatedAt']);
+    cb(err, userDetails);
   });
 });
 
@@ -44,8 +45,8 @@ passport.use(new LocalStrategy({
       console.log(user)
       if(!res) return cb(null, false, { message: 'Invalid Password' });
 
-      delete user.password;
-      return cb(null, user, { message: 'Login successful' });
+      const userDetails = _.pick(user, ['id', 'username', 'fullName', 'createdAt', 'updatedAt']);
+      return cb(null, userDetails, { message: 'Login successful' });
     });
   });
 }));

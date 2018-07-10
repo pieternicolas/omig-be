@@ -28,6 +28,7 @@ module.exports.routes = {
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
   'POST /user': 'user/create',
   'PUT /user': 'user/update',
+  'DELETE /user': 'user/delete',
   'POST /login': 'auth/login',
   'POST /logout': 'auth/logout'
 

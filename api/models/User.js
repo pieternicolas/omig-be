@@ -46,6 +46,11 @@ module.exports = {
 
   },
 
+  customToJSON: function() {
+    // Return a shallow copy of this record with the password removed.
+    return _.pick(this, ['id', 'username', 'fullName', 'createdAt', 'updatedAt']);
+  },
+
   beforeCreate: (values, cb) => {
     // Hash password
     // Generate the salt with 5 rounds

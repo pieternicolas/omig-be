@@ -55,11 +55,13 @@ module.exports = {
       // Hash the password after salt creation
       bcrypt.hash(values.password, salt, null, (err, hash) => {
         if (err) return cb(err);
-        values.encryptedPassword = hash;
 
         //Delete the passwords so that they are not stored in the DB
         delete values.password;
         delete values.confirmation;
+
+        // Replace password value with hashed password
+        values.password = hash;
 
         //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
         cb();
@@ -69,7 +71,7 @@ module.exports = {
 
   afterCreate: (values, cb) => {
     // Delete any resemblance of personal identity
-    delete values.encryptedPassword;
+    delete values.password;
     cb();
   }
 

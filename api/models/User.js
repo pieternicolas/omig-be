@@ -18,6 +18,7 @@ module.exports = {
       required: true,
       unique: true,
       maxLength: 50,
+      description: 'Username of the user to login',
       example: 'bananatictac12'
     },
 
@@ -33,6 +34,11 @@ module.exports = {
       type: 'string',
       description: 'Full name of current user',
       example: 'Nicolas Pieter'
+    },
+
+    accounts: {
+      collection: 'account',
+      via: 'userID'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -63,7 +69,6 @@ module.exports = {
 
         //Delete the passwords so that they are not stored in the DB
         delete values.password;
-        delete values.confirmation;
 
         // Replace password value with hashed password
         values.password = hash;
@@ -78,7 +83,38 @@ module.exports = {
     // Delete any resemblance of personal identity
     delete values.password;
     cb();
-  }
+  },
+
+  beforeUpdate: (values, cb) => {
+    // Hash password
+    // If the user does not update their password, continue automatically
+    if (!values.password) return cb();
+
+    // Generate the salt with 5 rounds
+    bcrypt.genSalt(5, (saltErr, salt) => {
+      if (saltErr) return cb(err);
+
+      // Hash the password after salt creation
+      bcrypt.hash(values.password, salt, null, (err, hash) => {
+        if (err) return cb(err);
+
+        //Delete the passwords so that they are not stored in the DB
+        delete values.password;
+
+        // Replace password value with hashed password
+        values.password = hash;
+
+        //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
+        cb();
+      });
+    });
+  },
+
+  afterUpdate: (values, cb) => {
+    // Delete any resemblance of personal identity
+    delete values.password;
+    cb();
+  },
 
 };
 

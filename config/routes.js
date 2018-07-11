@@ -36,8 +36,10 @@ module.exports.routes = {
   'POST /logout': 'auth/logout',
 
   // Account endpoints
-  'POST /account': 'account/create'
+  'POST /account': 'account/create',
 
+  // Post endpoints
+  'POST /post': 'post/create'
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗

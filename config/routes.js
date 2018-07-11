@@ -26,11 +26,17 @@ module.exports.routes = {
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
+  // User endpoints
   'POST /user': 'user/create',
   'PUT /user': 'user/update',
   'DELETE /user': 'user/delete',
+
+  // Authentication endpoints
   'POST /login': 'auth/login',
-  'POST /logout': 'auth/logout'
+  'POST /logout': 'auth/logout',
+
+  // Account endpoints
+  'POST /account': 'account/create'
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

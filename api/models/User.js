@@ -59,7 +59,7 @@ module.exports = {
 
   customToJSON: function() {
     // Return a shallow copy of this record with the password removed.
-    return _.pick(this, ['id', 'username', 'fullName', 'createdAt', 'updatedAt']);
+    return _.pick(this, ['id', 'username', 'fullName', 'accounts', 'posts', 'createdAt', 'updatedAt']);
   },
 
   beforeCreate: (values, cb) => {

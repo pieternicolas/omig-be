@@ -39,6 +39,11 @@ module.exports = {
     accounts: {
       collection: 'account',
       via: 'userID'
+    },
+
+    posts: {
+      collection: 'post',
+      via: 'userID'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

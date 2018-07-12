@@ -33,9 +33,9 @@ module.exports = {
       description: 'Scheduled time for this post to be posted on instagram.'
     },
 
-    // userID: {
-    //   model: 'user'
-    // },
+    userID: {
+      model: 'user'
+    },
 
     accountID: {
       model: 'account'

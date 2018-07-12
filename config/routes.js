@@ -43,7 +43,8 @@ module.exports.routes = {
   // Post endpoints
   'GET /post': 'post/find-all',
   'GET /post/:postID': 'post/find-one',
-  'POST /post': 'post/create'
+  'POST /post': 'post/create',
+  'POST /post/:postID': 'post/update'
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗

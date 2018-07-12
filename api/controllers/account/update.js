@@ -47,7 +47,7 @@ module.exports = {
     },
 
     notFound: {
-      description: 'If there is no posts found with the combination of id and user ID',
+      description: 'If there is no accounts found with the combination of id and user ID',
       responseType: 'notFound'
     }
 

@@ -33,8 +33,9 @@ module.exports.routes = {
   'DELETE /user': 'user/delete',
 
   // Authentication endpoints
-  'POST /login': 'auth/login',
-  'POST /logout': 'auth/logout',
+  'POST /auth/login': 'auth/login',
+  'POST /auth/logout': 'auth/logout',
+  'GET /auth/check': 'auth/check',
 
   // Account endpoints
   'GET /account': 'account/find-all',

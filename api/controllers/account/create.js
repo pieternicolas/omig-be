@@ -51,14 +51,11 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
+    // Get the user ID from the cookie
     const userID = await sails.helpers.getUserId(this.req.user);
 
-    const accountDetails = Object.assign({},
-      inputs,
-      { userID: userID }
-    );
-
-    const createdRecord = await Account.create(accountDetails)
+    // Insert the post to the database and return the inserted data
+    const createdRecord = await Account.create({ ...inputs, userID })
       .intercept('E_UNIQUE', (err)=> {
         return exits.duplicateUsername(err);
       })

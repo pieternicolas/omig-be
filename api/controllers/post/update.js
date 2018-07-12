@@ -67,7 +67,7 @@ module.exports = {
       })
       .fetch();
 
-    return exits.success(updatedPost );
+    return exits.success(updatedPost);
 
   }
 

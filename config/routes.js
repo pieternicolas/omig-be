@@ -44,7 +44,8 @@ module.exports.routes = {
   'GET /post': 'post/find-all',
   'GET /post/:postID': 'post/find-one',
   'POST /post': 'post/create',
-  'POST /post/:postID': 'post/update'
+  'POST /post/:postID': 'post/update',
+  'DELETE /post/:postID': 'post/delete'
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗

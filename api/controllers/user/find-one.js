@@ -1,13 +1,19 @@
 module.exports = {
 
 
-  friendlyName: 'Find one',
+  friendlyName: 'Find the account and the account details',
 
 
-  description: '',
+  description: 'Get the user details with optional everything linked to the account',
 
 
   inputs: {
+
+    allData: {
+      type: 'boolean',
+      description: 'If the user requests to get everything that is linked to their account',
+      defaulsTo: false
+    }
 
   },
 
@@ -19,7 +25,20 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    return exits.success();
+    // Get the user ID from the cookie
+    const userID = await sails.helpers.getUserId(this.req.user);
+
+    // If the allData param is set to true, get all linked data
+    let fetchedRecords
+    if (inputs.allData) {
+      fetchedRecords = await User.find({ id: userID })
+        .populate('posts')
+        .populate('accounts');
+    } else {
+      fetchedRecords = await User.find({ id: userID })
+    };
+
+    return exits.success(fetchedRecords);
 
   }
 

@@ -27,6 +27,7 @@ module.exports.routes = {
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
   // User endpoints
+  'GET /user': 'user/find-one',
   'POST /user': 'user/create',
   'PUT /user': 'user/update',
   'DELETE /user': 'user/delete',

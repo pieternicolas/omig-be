@@ -1,5 +1,5 @@
 /**
- * Account.js
+ * Post.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,35 +12,33 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    username: {
-      type: 'string',
+    imageUrl: {
+      type: 'json',
       required: true,
-      unique: true,
-      maxLength: 50,
-      description: 'Instagram account username',
-      example: 'bananatictac12'
+      description: 'List of images to be posted for this post.',
+      example: '[kacang.jpg]'
     },
 
-    name: {
-      type: 'string',
-      maxLength: 100,
-      description: 'Instagram account name (not required, only for frontend purposes)',
-      example: 'Account jual kacang'
+    caption: {
+      type: 'json',
+      required: true,
+      description: 'List of captions, in case there should be more than one caption in a post (comment captions).'
     },
 
-    description: {
-      type: 'string',
-      description: 'Account description for frontend purposes only',
-      example: 'Ini account yg buat jualan kacang'
+    postTime: {
+      type: 'number',
+      columnType: 'datetime',
+      required: true,
+      isAfter: new Date(),
+      description: 'Scheduled time for this post to be posted on instagram.'
     },
 
-    userID: {
-      model: 'user'
-    },
+    // userID: {
+    //   model: 'user'
+    // },
 
-    posts: {
-      collection: 'post',
-      via: 'accountID'
+    accountID: {
+      model: 'account'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

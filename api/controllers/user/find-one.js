@@ -28,7 +28,8 @@ module.exports = {
     // Get the user ID from the cookie
     const userID = await sails.helpers.getUserId(this.req.user);
 
-    // If the allData param is set to true, get all linked data
+    // If the allData param is set to true, get all linked data.
+    // Otherwise get only the needed data for the user
     let fetchedRecords
     if (inputs.allData) {
       fetchedRecords = await User.find({ id: userID })

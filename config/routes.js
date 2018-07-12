@@ -39,6 +39,7 @@ module.exports.routes = {
   // Account endpoints
   'GET /account': 'account/find-all',
   'POST /account': 'account/create',
+  'POST /account/:accountID': 'account/update',
 
   // Post endpoints
   'GET /post': 'post/find-all',

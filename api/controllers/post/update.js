@@ -56,18 +56,18 @@ module.exports = {
     const userID = await sails.helpers.getUserId(this.req.user);
 
     // Check if the post actually exists or belongs to the user
-    const doesPostExist = await Post.findOne({ userID, id: postID });
+    const doesPostExist = await Post.findOne({ userID, id: inputs.postID });
     if (!doesPostExist) return exits.notFound();
 
     // Update the aforementioned post and fetch the new info
-    const updatedPost = await Post.update({ id: postID })
+    const updatedPost = await Post.update({ id: inputs.postID })
       .set(inputs)
       .intercept('UsageError', (err)=> {
         return exits.badRequest(err);
       })
       .fetch();
 
-    return exits.success();
+    return exits.success(updatedPost );
 
   }
 
